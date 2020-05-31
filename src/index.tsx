@@ -23,23 +23,15 @@ import {
     Text,
 } from 'react-native-paper';
 import CommonStyles from './common/common-styles';
-import Commuter from './commuter';
+import Rider from './rider';
 
-function CarOwner() {
+function RideOwner() {
     return (
         <View style={CommonStyles.container}>
             <Text>Welcome</Text>
         </View>
     );
 }
-
-// function Commuter() {
-//     return (
-//         <View style={CommonStyles.container}>
-//             <Text>Pooling App</Text>
-//         </View>
-//     );
-// }
 
 enableScreens();
 
@@ -48,8 +40,8 @@ type RootDrawerParams = {
 };
 
 type RecTabsParams = {
-    Commuter: undefined;
-    CarOwner: undefined;
+    Rider: undefined;
+    RideOwner: undefined;
 };
 
 type RecStackParams = {
@@ -59,45 +51,6 @@ type RecStackParams = {
 const MainDrawer = createDrawerNavigator<RootDrawerParams>();
 const RecStack = createStackNavigator<RecStackParams>();
 const RecTabs = createMaterialTopTabNavigator<RecTabsParams>();
-
-// function RecTabsScreen() {
-//     return (
-//         <RecTabs.Navigator>
-//             <RecTabs.Screen
-//                 name="Commuter"
-//                 component={Commuter}
-//                 options={{ title: 'I am a Commuter' }}
-//             />
-//             <RecTabs.Screen
-//                 name="CarOwner"
-//                 component={CarOwner}
-//                 options={{ title: 'I am a Car-Owner' }}
-//             />
-//         </RecTabs.Navigator>
-//     );
-// }
-
-// function RecStackScreen(theme: any) {
-//     return (
-//         <RecStack.Navigator screenOptions={{
-//             headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
-//         }}>
-//             <RecStack.Screen
-//                 name="RecTabs"
-//                 options={{
-//                     title: 'REC',
-//                     headerLeft: {() => (
-//             <Appbar.Action
-//                 color={theme.colors.text}
-//                 icon="menu"
-//                 onPress={() => navigation.toggleDrawer()}
-//             />
-//                                             )},
-//                                     }}
-//                                 ></RecStack.Screen>
-//         </RecStack.Navigator >
-//     );
-// }
 
 const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const THEME_PERSISTENCE_KEY = 'THEME_TYPE';
@@ -184,7 +137,7 @@ export default function App() {
                                 <RecStack.Screen
                                     name="RecScreen"
                                     options={{
-                                        title: 'REC',
+                                        title: 'Rohtak Eco Club (REC)',
                                         headerLeft: () => (
                                             <Appbar.Action
                                                 color={theme.colors.text}
@@ -201,14 +154,14 @@ export default function App() {
                                     }) => (
                                             <RecTabs.Navigator>
                                                 <RecTabs.Screen
-                                                    name="Commuter"
-                                                    component={Commuter}
-                                                    options={{ title: 'I am a Commuter' }}
+                                                    name="Rider"
+                                                    component={Rider}
+                                                // options={{ title: 'I am a Rider' }}
                                                 />
                                                 <RecTabs.Screen
-                                                    name="CarOwner"
-                                                    component={CarOwner}
-                                                    options={{ title: 'I am a Car-Owner' }}
+                                                    name="RideOwner"
+                                                    component={RideOwner}
+                                                    options={{ title: 'Ride-Owner' }}
                                                 />
                                             </RecTabs.Navigator>
                                         )}
