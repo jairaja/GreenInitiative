@@ -1,19 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import 'react-native-gesture-handler';
+// import React from 'react';
+// import { StyleSheet, Text, View } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
+// import Welcome from './src/welcome';
+// import * as config from './src/common/config';
+// import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+import 'react-native-gesture-handler';
+import { registerRootComponent } from 'expo';
+import { AppRegistry } from 'react-native';
+import App from './src/index';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+AppRegistry.registerComponent('GreenInitiative', () => App);
+registerRootComponent(App);
+export default App;
