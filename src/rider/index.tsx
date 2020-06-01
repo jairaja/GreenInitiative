@@ -1,41 +1,54 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CommonStyles from '../common/common-styles';
-import { Switch } from 'react-native-paper';
+import FindRide from './find-ride';
+import PostNewRequirement from './post-new-requirement';
+import GiSwitch from '../common/controls/gi-switch';
 
 export default function Rider() {
 
-  const [readPosts, setReadPosts] = useState(true);
+  const [readPosts, setReadPosts] = useState(false);
 
   return (
     <View style={CommonStyles.container}>
       <View style={RiderStyle.readPostSelection}>
-        <Text style={{
-          // paddingTop="3px",
-        }}>{"Find Ride"}</Text>
-        <Switch
-          trackColor={{ false: "#808080", true: "#808080" }}
-          thumbColor={"#F8F8FF"}
-          ios_backgroundColor="#808080"
-          value={readPosts}
-          onValueChange={() => {
-            setReadPosts(!readPosts);
-          }} />
-        <Text>{"Post New Requirement"}</Text>
+
+        <View style={RiderStyle.readPostSelectionMembers}>
+          <Text style={{ marginTop: 2, }}>
+            {"Find Ride"}
+          </Text>
+        </View>
+
+        <View style={{
+          flex: 1,
+          alignItems: 'center',
+        }}>
+          <GiSwitch
+            value={readPosts}
+            onValueChange={() => {
+              setReadPosts(!readPosts);
+            }}
+          />
+        </View>
+
+        <View style={RiderStyle.readPostSelectionMembers}>
+          <Text style={{ marginTop: 2, }}>
+            {"Post New Requirement"}
+          </Text>
+        </View>
 
       </View>
 
-      {readPosts &&
-        <View>
-          <Text>{"ReadPosts true"}</Text>
-        </View>
-      }
+      <View style={RiderStyle.readPostView}>
 
-      {!readPosts &&
-        <View>
-          <Text>{"ReadPosts false"}</Text>
-        </View>
-      }
+        {!readPosts &&
+          <FindRide />
+        }
+
+        {readPosts &&
+          <PostNewRequirement />
+        }
+      </View>
 
     </View>
   );
@@ -45,9 +58,19 @@ const RiderStyle = StyleSheet.create({
   readPostSelection: {
     marginTop: 20,
     flexDirection: "row",
-    // alignSelf: "center",
-    // alignItems: 'flex-start',
-    // alignContent: "flex-start",
-    justifyContent: "flex-start",
+  },
+  readPostSelectionMembers: {
+    flex: 2,
+    alignItems: 'center',
+  },
+  readPostView: {
+    margin: 10,
+    borderWidth: 1,
+    flex: 1,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderColor: "#808080",
   }
 });
