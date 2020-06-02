@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import CommonStyles from '../common/common-styles';
 import FindRide from './find-ride';
 import PostNewRequirement from './post-new-requirement';
@@ -13,11 +13,15 @@ export default function Rider() {
     <View style={CommonStyles.container}>
       <View style={RiderStyle.readPostSelection}>
 
-        <View style={RiderStyle.readPostSelectionMembers}>
-          <Text style={{ marginTop: 2, }}>
+        <TouchableOpacity
+          style={RiderStyle.readPostSelectionMembers}
+          onPress={() => {
+            setReadPosts(false);
+          }}>
+          <Text style={{ marginTop: 3, }}>
             {"Find Ride"}
           </Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={{
           flex: 1,
@@ -31,11 +35,16 @@ export default function Rider() {
           />
         </View>
 
-        <View style={RiderStyle.readPostSelectionMembers}>
-          <Text style={{ marginTop: 2, }}>
+        <TouchableOpacity
+          style={RiderStyle.readPostSelectionMembers}
+          onPress={() => {
+            setReadPosts(true);
+          }}
+        >
+          <Text style={{ marginTop: 3, }}>
             {"Post New Requirement"}
           </Text>
-        </View>
+        </TouchableOpacity>
 
       </View>
 
@@ -56,7 +65,8 @@ export default function Rider() {
 
 const RiderStyle = StyleSheet.create({
   readPostSelection: {
-    marginTop: 20,
+    marginTop: 30,
+    marginBottom: 20,
     flexDirection: "row",
   },
   readPostSelectionMembers: {
@@ -65,13 +75,13 @@ const RiderStyle = StyleSheet.create({
   },
   readPostView: {
     margin: 10,
-    borderWidth: 1,
+    borderWidth: 0.5,
     flex: 1,
     alignSelf: 'stretch',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    // borderBottomLeftRadius: 20,
+    // borderBottomRightRadius: 20,
     borderColor: "#bdbdbd",
   }
 });

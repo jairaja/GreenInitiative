@@ -25,7 +25,7 @@ import {
 import CommonStyles from './common/common-styles';
 import Rider from './rider';
 
-function RideOwner() {
+function VehicleOwner() {
     return (
         <View style={CommonStyles.container}>
             <Text>Welcome</Text>
@@ -41,7 +41,7 @@ type RootDrawerParams = {
 
 type RecTabsParams = {
     Rider: undefined;
-    RideOwner: undefined;
+    VehicleOwner: undefined;
 };
 
 type RecStackParams = {
@@ -156,12 +156,12 @@ export default function App() {
                                                 <RecTabs.Screen
                                                     name="Rider"
                                                     component={Rider}
-                                                // options={{ title: 'I am a Rider' }}
+                                                    options={{ title: 'I am a Rider' }}
                                                 />
                                                 <RecTabs.Screen
-                                                    name="RideOwner"
-                                                    component={RideOwner}
-                                                    options={{ title: 'Ride-Owner' }}
+                                                    name="VehicleOwner"
+                                                    component={VehicleOwner}
+                                                    options={{ title: 'I am a Vehicle Owner' }}
                                                 />
                                             </RecTabs.Navigator>
                                         )}
