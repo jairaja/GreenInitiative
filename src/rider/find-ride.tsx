@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
-import GiSwitch from '../common/controls/gi-switch';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox, ButtonGroup } from 'react-native-elements';
 
 const HOME_TO_DESTINATION = "Rohtak to Gurgaon";
 const DESTINATION_TO_HOME = "Gurgaon to Rohtak";
@@ -10,52 +9,43 @@ const DESTINATION_TO_HOME = "Gurgaon to Rohtak";
 export default function FindRide() {
 
   const [count, setCount] = useState(0);
-  const [destToHome, setDestToHome] = useState(false);
-
+  const [selectedIndexRoute, setSelectedIndexRoute] = useState(0);
+  const [selectedIndexVehiclePref, setSelectedIndexVehiclePref] = useState(0);
   const [daysSelection, setDaysSelection] = useState({
     today: false,
     tomorrow: false,
   });
 
+  const routeButtonsGroup = [HOME_TO_DESTINATION, DESTINATION_TO_HOME]
+  const vehiclePreferenceButtonsGroup = ["Car", "Bike", "Any"]
+
   return (
     <View style={findRideStyles.findRideMainView}>
-      {/* <Text>{"find ride                                                                         " + count}</Text> */}
 
       <View style={findRideStyles.findRideRouteSelectionContainer}>
+        <Text
+          style={findRideStyles.findRideRouteSelectionContainerText}
+        >{"Looking for a ride from:"}</Text>
 
-        <View style={findRideStyles.findRideRouteSelectionElements}>
-          <Text style={findRideStyles.homeDestinationText}>
-            {HOME_TO_DESTINATION}
-          </Text>
-        </View>
-
-        <View style={{
-          flex: 1,
-          alignItems: 'center',
-        }}>
-          <GiSwitch
-            value={destToHome}
-            onValueChange={() => {
-              setDestToHome(!destToHome);
-            }}
-          />
-        </View>
-
-        <View style={findRideStyles.findRideRouteSelectionElements}>
-          <Text style={findRideStyles.homeDestinationText}>
-            {DESTINATION_TO_HOME}
-          </Text>
-        </View>
-
+        <ButtonGroup
+          onPress={(selectedindex) => {
+            setSelectedIndexRoute(selectedindex);
+          }}
+          selectedIndex={selectedIndexRoute}
+          buttons={routeButtonsGroup}
+        />
       </View>
 
       <View style={findRideStyles.findRidesSelectedDays}>
-        <Text>{"When:"}</Text>
+        <Text
+          style={findRideStyles.findRidesSelectedDaysText}
+        >{"Riding:"}</Text>
 
         <CheckBox
           title="Today"
           checked={daysSelection.today}
-          containerStyle={{ backgroundColor: "#f5f5f5" }}
+          containerStyle={{ backgroundColor: "#F2F2F2" }}
+          textStyle={{ fontWeight: "normal" }}
           onPress={() => {
             setDaysSelection(
               {
@@ -68,7 +58,8 @@ export default function FindRide() {
         <CheckBox
           title="Tomorrow"
           checked={daysSelection.tomorrow}
-          containerStyle={{ backgroundColor: "#f5f5f5" }}
+          containerStyle={{ backgroundColor: "#F2F2F2" }}
+          textStyle={{ fontWeight: "normal" }}
           onPress={() => {
             setDaysSelection(
               {
@@ -80,7 +71,21 @@ export default function FindRide() {
 
       </View>
 
-      <Divider />
+      <View style={findRideStyles.vehiclePreferenceConatiner}>
+        <Text
+          style={findRideStyles.findRideRouteSelectionContainerText}
+        >{"Vehicle preference:"}</Text>
+
+        <ButtonGroup
+          onPress={(selectedindex) => {
+            setSelectedIndexVehiclePref(selectedindex);
+          }}
+          selectedIndex={selectedIndexVehiclePref}
+          buttons={vehiclePreferenceButtonsGroup}
+        />
+      </View>
+
+      <Divider style={{ marginLeft: 50, marginRight: 50, }} />
 
       <View style={findRideStyles.findRideFindButton}>
         <Button
@@ -93,6 +98,9 @@ export default function FindRide() {
 }
 
 const findRideStyles = StyleSheet.create({
+  vehiclePreferenceConatiner: {
+    marginBottom: 40,
+  },
   findRideMainView: {
     flexDirection: "column",
   },
@@ -104,16 +112,24 @@ const findRideStyles = StyleSheet.create({
   },
   findRideRouteSelectionContainer: {
     marginTop: 20,
-    flexDirection: "row",
   },
-  findRideRouteSelectionElements: {
-    flex: 5,
-    alignItems: 'center',
+  findRideRouteSelectionContainerText: {
+    fontWeight: "bold",
+    marginLeft: 10,
   },
   homeDestinationText: {
     marginTop: 2,
   },
   findRidesSelectedDays: {
     flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  findRidesSelectedDaysText: {
+    fontWeight: "bold",
+    left: -10,
+    paddingBottom: 5,
   }
 });

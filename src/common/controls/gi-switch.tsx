@@ -12,9 +12,9 @@ export default function GiSwitch(props: GiSwitchProps) {
 
   return (
     <Switch
-      trackColor={{ false: "#808080", true: "#808080" }}
+      trackColor={{ false: "#2089DC", true: "#2089DC" }}
       thumbColor={"#F8F8FF"}
-      ios_backgroundColor="#808080"
+      ios_backgroundColor="#2089DC"
       value={value}
       onValueChange={onValueChange}
     />
