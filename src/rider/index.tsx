@@ -60,17 +60,18 @@ const RiderStyle = StyleSheet.create({
     flexDirection: "row",
   },
   readPostSelectionMembers: {
-    flex: 2,
+    flex: 8,
     alignItems: 'center',
   },
   readPostView: {
     margin: 10,
     borderWidth: 1,
     flex: 1,
+    alignSelf: 'stretch',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    borderColor: "#808080",
+    borderColor: "#bdbdbd",
   }
 });
