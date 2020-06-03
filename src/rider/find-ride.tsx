@@ -12,7 +12,7 @@ export default function FindRide() {
   const [selectedIndexRoute, setSelectedIndexRoute] = useState(0);
   const [selectedIndexVehiclePref, setSelectedIndexVehiclePref] = useState(0);
   const [daysSelection, setDaysSelection] = useState({
-    today: false,
+    today: true,
     tomorrow: false,
   });
 
@@ -87,10 +87,13 @@ export default function FindRide() {
 
       <Divider style={{ marginLeft: 50, marginRight: 50, }} />
 
-      <View style={findRideStyles.findRideFindButton}>
+      <View style={findRideStyles.findRidePostNewRequestButtonsContainer}>
         <Button
           onPress={() => setCount(count + 1)}
-          title={"Find"} />
+          title={"Find Rides"} />
+        <Button
+          onPress={() => setCount(count + 1)}
+          title={"Post New Request"} />
       </View>
 
     </View >
@@ -104,11 +107,11 @@ const findRideStyles = StyleSheet.create({
   findRideMainView: {
     flexDirection: "column",
   },
-  findRideFindButton: {
-    width: 120,
-    alignSelf: "center",
+  findRidePostNewRequestButtonsContainer: {
+    justifyContent: "space-around",
     marginTop: 20,
     marginBottom: 20,
+    flexDirection: "row",
   },
   findRideRouteSelectionContainer: {
     marginTop: 20,
