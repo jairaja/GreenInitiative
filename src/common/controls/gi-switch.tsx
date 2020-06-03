@@ -20,3 +20,52 @@ export default function GiSwitch(props: GiSwitchProps) {
     />
   );
 }
+
+
+{/* <View style={RiderStyle.readPostSelection}>
+
+        <TouchableOpacity
+          style={RiderStyle.readPostSelectionMembers}
+          onPress={() => {
+            setReadPosts(false);
+          }}>
+          <Text style={{ marginTop: 3, }}>
+            {"Find Ride"}
+          </Text>
+        </TouchableOpacity>
+
+        <View style={{
+          flex: 1,
+          alignItems: 'center',
+        }}>
+          <GiSwitch
+            value={readPosts}
+            onValueChange={() => {
+              setReadPosts(!readPosts);
+            }}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={RiderStyle.readPostSelectionMembers}
+          onPress={() => {
+            setReadPosts(true);
+          }}
+        >
+          <Text style={{ marginTop: 3, }}>
+            {"Post New Requirement"}
+          </Text>
+        </TouchableOpacity>
+
+      </View> */}
+
+      // StyleSheet.create({
+      //   readPostSelection: {
+      //     marginTop: 30,
+      //     marginBottom: 20,
+      //     flexDirection: "row",
+      //   },
+      //   readPostSelectionMembers: {
+      //     flex: 8,
+      //     alignItems: 'center',
+      //   },

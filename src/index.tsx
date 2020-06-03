@@ -25,14 +25,6 @@ import {
 import CommonStyles from './common/common-styles';
 import Rider from './rider';
 
-function VehicleOwner() {
-    return (
-        <View style={CommonStyles.container}>
-            <Text>Welcome</Text>
-        </View>
-    );
-}
-
 enableScreens();
 
 type RootDrawerParams = {
