@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { ButtonGroup, Input } from 'react-native-elements';
 import config from '../common/config';
 
@@ -7,8 +7,8 @@ export default function PostNewRequest() {
 
   const routeButtonsGroup = config.ROUTE_INFO;
   const vehiclePreferenceButtonsGroup = config.PREFERRED_VEHICLE;
-  // const [selectedIndexRoute, setSelectedIndexRoute] = useState(0);
-  const [riderNewRequest, setRiderNewRequest] = useState({
+
+  const [riderNewRequestState, setRiderNewRequestState] = useState({
     selectedRouteIndex: 0,
     preferredVehicleInddex: 0,
   });
@@ -23,12 +23,12 @@ export default function PostNewRequest() {
 
         <ButtonGroup
           onPress={(selectedIndex) => {
-            setRiderNewRequest({
-              ...riderNewRequest,
+            setRiderNewRequestState({
+              ...riderNewRequestState,
               selectedRouteIndex: selectedIndex
             });
           }}
-          selectedIndex={riderNewRequest.selectedRouteIndex}
+          selectedIndex={riderNewRequestState.selectedRouteIndex}
           buttons={routeButtonsGroup}
         />
       </View>
@@ -40,12 +40,12 @@ export default function PostNewRequest() {
 
         <ButtonGroup
           onPress={(selectedIndex) => {
-            setRiderNewRequest({
-              ...riderNewRequest,
+            setRiderNewRequestState({
+              ...riderNewRequestState,
               preferredVehicleInddex: selectedIndex
             });
           }}
-          selectedIndex={riderNewRequest.preferredVehicleInddex}
+          selectedIndex={riderNewRequestState.preferredVehicleInddex}
           buttons={vehiclePreferenceButtonsGroup}
         />
       </View>
@@ -62,6 +62,13 @@ export default function PostNewRequest() {
         />
       </View>
 
+      <Button
+        onPress={() => {
+          setRiderNewRequestState({
+            ...riderNewRequestState,
+          });
+        }}
+        title={"Post New Request"} />
     </View>
   );
 }

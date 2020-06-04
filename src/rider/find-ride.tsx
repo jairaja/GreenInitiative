@@ -6,12 +6,13 @@ import Config from './../common/config';
 
 export default function FindRide() {
 
-  const [count, setCount] = useState(0);
-  const [selectedIndexRoute, setSelectedIndexRoute] = useState(0);
-  const [selectedIndexVehiclePref, setSelectedIndexVehiclePref] = useState(0);
-  const [daysSelection, setDaysSelection] = useState({
-    today: true,
-    tomorrow: false,
+  const [riderFindRideState, setRiderFindRideState] = useState({
+    selectedRouteIndex: 0,
+    vehiclePreferenceIndex: 0,
+    selectedDays: {
+      today: true,
+      tomorrow: false,
+    },
   });
 
   const routeButtonsGroup = Config.ROUTE_INFO;
@@ -27,9 +28,12 @@ export default function FindRide() {
 
         <ButtonGroup
           onPress={(selectedindex) => {
-            setSelectedIndexRoute(selectedindex);
+            setRiderFindRideState({
+              ...riderFindRideState,
+              selectedRouteIndex: selectedindex,
+            });
           }}
-          selectedIndex={selectedIndexRoute}
+          selectedIndex={riderFindRideState.selectedRouteIndex}
           buttons={routeButtonsGroup}
         />
       </View>
@@ -41,28 +45,34 @@ export default function FindRide() {
 
         <CheckBox
           title="Today"
-          checked={daysSelection.today}
+          checked={riderFindRideState.selectedDays.today}
           containerStyle={{ backgroundColor: "#F2F2F2" }}
           textStyle={{ fontWeight: "normal" }}
           onPress={() => {
-            setDaysSelection(
+            setRiderFindRideState(
               {
-                ...daysSelection,
-                today: !daysSelection.today,
+                ...riderFindRideState,
+                selectedDays: {
+                  ...riderFindRideState.selectedDays,
+                  today: !riderFindRideState.selectedDays.today,
+                },
               }
             );
           }} />
 
         <CheckBox
           title="Tomorrow"
-          checked={daysSelection.tomorrow}
+          checked={riderFindRideState.selectedDays.tomorrow}
           containerStyle={{ backgroundColor: "#F2F2F2" }}
           textStyle={{ fontWeight: "normal" }}
           onPress={() => {
-            setDaysSelection(
+            setRiderFindRideState(
               {
-                ...daysSelection,
-                tomorrow: !daysSelection.tomorrow,
+                ...riderFindRideState,
+                selectedDays: {
+                  ...riderFindRideState.selectedDays,
+                  tomorrow: !riderFindRideState.selectedDays.tomorrow,
+                },
               }
             );
           }} />
@@ -76,22 +86,28 @@ export default function FindRide() {
 
         <ButtonGroup
           onPress={(selectedindex) => {
-            setSelectedIndexVehiclePref(selectedindex);
+            setRiderFindRideState({
+              ...riderFindRideState,
+              vehiclePreferenceIndex: selectedindex,
+            });
           }}
-          selectedIndex={selectedIndexVehiclePref}
+          selectedIndex={riderFindRideState.vehiclePreferenceIndex}
           buttons={vehiclePreferenceButtonsGroup}
         />
       </View>
 
       <Divider style={{ marginLeft: 50, marginRight: 50, }} />
 
-      <View style={findRideStyles.findRideFindButton}>
+      <View style={findRideStyles.findRideButton}>
         <Button
-          onPress={() => setCount(count + 1)}
+          onPress={() => {
+            setRiderFindRideState({
+              ...riderFindRideState,
+            });
+          }}
+          disabled={!(riderFindRideState.selectedDays.today ||
+            riderFindRideState.selectedDays.tomorrow)}
           title={"Find Rides"} />
-        {/* <Button
-          onPress={() => setCount(count + 1)}
-          title={"Post New Request"} /> */}
       </View>
 
     </View >
@@ -105,7 +121,7 @@ const findRideStyles = StyleSheet.create({
   findRideMainView: {
     flexDirection: "column",
   },
-  findRideFindButton: {
+  findRideButton: {
     alignSelf: "center",
     marginTop: 20,
     marginBottom: 20,
