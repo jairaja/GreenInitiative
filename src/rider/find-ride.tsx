@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
 import { CheckBox, ButtonGroup } from 'react-native-elements';
-
-const HOME_TO_DESTINATION = "Rohtak to Gurgaon";
-const DESTINATION_TO_HOME = "Gurgaon to Rohtak";
+import Config from './../common/config';
 
 export default function FindRide() {
 
@@ -16,8 +14,8 @@ export default function FindRide() {
     tomorrow: false,
   });
 
-  const routeButtonsGroup = [HOME_TO_DESTINATION, DESTINATION_TO_HOME]
-  const vehiclePreferenceButtonsGroup = ["Car", "Bike", "Any"]
+  const routeButtonsGroup = Config.ROUTE_INFO;
+  const vehiclePreferenceButtonsGroup = Config.PREFERRED_VEHICLE;
 
   return (
     <View style={findRideStyles.findRideMainView}>
@@ -25,7 +23,7 @@ export default function FindRide() {
       <View style={findRideStyles.findRideRouteSelectionContainer}>
         <Text
           style={findRideStyles.findRideRouteSelectionContainerText}
-        >{"Looking for a ride from:"}</Text>
+        >{"Find rides from:"}</Text>
 
         <ButtonGroup
           onPress={(selectedindex) => {
@@ -87,13 +85,13 @@ export default function FindRide() {
 
       <Divider style={{ marginLeft: 50, marginRight: 50, }} />
 
-      <View style={findRideStyles.findRidePostNewRequestButtonsContainer}>
+      <View style={findRideStyles.findRideFindButton}>
         <Button
           onPress={() => setCount(count + 1)}
           title={"Find Rides"} />
-        <Button
+        {/* <Button
           onPress={() => setCount(count + 1)}
-          title={"Post New Request"} />
+          title={"Post New Request"} /> */}
       </View>
 
     </View >
@@ -107,11 +105,10 @@ const findRideStyles = StyleSheet.create({
   findRideMainView: {
     flexDirection: "column",
   },
-  findRidePostNewRequestButtonsContainer: {
-    justifyContent: "space-around",
+  findRideFindButton: {
+    alignSelf: "center",
     marginTop: 20,
     marginBottom: 20,
-    flexDirection: "row",
   },
   findRideRouteSelectionContainer: {
     marginTop: 20,
