@@ -8,9 +8,15 @@ const GOOGLE_API_KEY = '1234'; // dev
 
 const APP_NAME = 'REC';
 
+const ROUTE_INFO = ["Rohtak to Gurgaon", "Gurgaon to Rohtak"];
+
+const PREFERRED_VEHICLE = ["Car", "Bike", "Any"];
+
 export default {
   SERVER_URL,
   GOOGLE_API_KEY,
   APP_NAME,
+  ROUTE_INFO,
+  PREFERRED_VEHICLE,
 };
 

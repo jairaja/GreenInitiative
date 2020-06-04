@@ -17,13 +17,12 @@ import config from './common/config';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DefaultTheme, InitialState, DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { Platform, AsyncStorage, Linking } from 'react-native';
-import { View } from 'react-native';
 import {
     Appbar,
     Text,
 } from 'react-native-paper';
-import CommonStyles from './common/common-styles';
 import Rider from './rider';
+import VehicleOwner from './vehicle-owner';
 
 enableScreens();
 
