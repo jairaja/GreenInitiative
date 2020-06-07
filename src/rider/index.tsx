@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import CommonStyles from '../common/common-styles';
 import FindRide from './find-ride';
 import PostNewRequest from './post-new-request';
@@ -9,7 +9,7 @@ export default function Rider() {
   const [readPosts, setReadPosts] = useState(false);
 
   return (
-    <View style={CommonStyles.container}>
+    <ScrollView style={CommonStyles.container}>
       <View style={RiderStyle.readPostSelection}>
 
         <TouchableOpacity
@@ -41,30 +41,24 @@ export default function Rider() {
           }}
         >
           <Text style={{ marginTop: 3, }}>
-            {"Post New Request"}
+            Post New Request
           </Text>
         </TouchableOpacity>
 
       </View>
 
       <View style={RiderStyle.readPostView}>
-        {!readPosts &&
-          <FindRide />
-        }
-
-        {readPosts &&
-          <PostNewRequest />
-        }
+        <FindRide visible={!readPosts} />
+        <PostNewRequest visible={readPosts} />
       </View>
 
-    </View>
+    </ScrollView>
   );
 }
 
 const RiderStyle = StyleSheet.create({
   readPostSelection: {
-    marginTop: 30,
-    marginBottom: 20,
+    marginTop: 20,
     flexDirection: "row",
   },
   readPostSelectionMembers: {
@@ -73,13 +67,9 @@ const RiderStyle = StyleSheet.create({
   },
   readPostView: {
     margin: 10,
+    padding: 10,
     borderWidth: 0.5,
     flex: 1,
-    alignSelf: 'stretch',
-    // borderTopLeftRadius: 20,
-    // borderTopRightRadius: 20,
-    // borderBottomLeftRadius: 20,
-    // borderBottomRightRadius: 20,
     borderColor: "#bdbdbd",
   }
 });

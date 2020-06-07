@@ -4,7 +4,11 @@ import { Divider } from 'react-native-paper';
 import { CheckBox, ButtonGroup } from 'react-native-elements';
 import Config from './../common/config';
 
-export default function FindRide() {
+interface FindRideProp {
+  visible: boolean;
+}
+
+export default function FindRide(prop: FindRideProp) {
 
   const [riderFindRideState, setRiderFindRideState] = useState({
     selectedRouteIndex: 0,
@@ -15,123 +19,124 @@ export default function FindRide() {
     },
   });
 
-  const routeButtonsGroup = Config.ROUTE_INFO;
-  const vehiclePreferenceButtonsGroup = Config.PREFERRED_VEHICLE;
-
   return (
-    <View style={findRideStyles.findRideMainView}>
+    <>
+      {
+        prop.visible &&
+        <View style={findRideStyles.findRideMainView}>
 
-      <View style={findRideStyles.findRideRouteSelectionContainer}>
-        <Text
-          style={findRideStyles.findRideRouteSelectionContainerText}
-        >{"Find rides from:"}</Text>
+          <View style={findRideStyles.findRideRouteSelectionContainer}>
+            <Text
+              style={findRideStyles.findRideRouteSelectionContainerText}
+            >Find rides from:</Text>
 
-        <ButtonGroup
-          onPress={(selectedindex) => {
-            setRiderFindRideState({
-              ...riderFindRideState,
-              selectedRouteIndex: selectedindex,
-            });
-          }}
-          selectedIndex={riderFindRideState.selectedRouteIndex}
-          buttons={routeButtonsGroup}
-        />
-      </View>
+            <ButtonGroup
+              onPress={(selectedindex) => {
+                setRiderFindRideState({
+                  ...riderFindRideState,
+                  selectedRouteIndex: selectedindex,
+                });
+              }}
+              selectedIndex={riderFindRideState.selectedRouteIndex}
+              buttons={Config.ROUTE_INFO}
+            />
+          </View>
 
-      <View style={findRideStyles.findRidesSelectedDays}>
-        <Text
-          style={findRideStyles.findRidesSelectedDaysText}
-        >{"Riding:"}</Text>
+          <View style={findRideStyles.findRidesSelectedDays}>
+            <Text
+              style={findRideStyles.findRidesSelectedDaysText}
+            >Riding:</Text>
 
-        <CheckBox
-          title="Today"
-          checked={riderFindRideState.selectedDays.today}
-          containerStyle={{ backgroundColor: "#F2F2F2" }}
-          textStyle={{ fontWeight: "normal" }}
-          onPress={() => {
-            setRiderFindRideState(
-              {
-                ...riderFindRideState,
-                selectedDays: {
-                  ...riderFindRideState.selectedDays,
-                  today: !riderFindRideState.selectedDays.today,
-                },
-              }
-            );
-          }} />
+            <CheckBox
+              title="Today"
+              checked={riderFindRideState.selectedDays.today}
+              containerStyle={{ backgroundColor: "#F2F2F2" }}
+              textStyle={{ fontWeight: "normal" }}
+              onPress={() => {
+                setRiderFindRideState(
+                  {
+                    ...riderFindRideState,
+                    selectedDays: {
+                      ...riderFindRideState.selectedDays,
+                      today: !riderFindRideState.selectedDays.today,
+                    },
+                  }
+                );
+              }} />
 
-        <CheckBox
-          title="Tomorrow"
-          checked={riderFindRideState.selectedDays.tomorrow}
-          containerStyle={{ backgroundColor: "#F2F2F2" }}
-          textStyle={{ fontWeight: "normal" }}
-          onPress={() => {
-            setRiderFindRideState(
-              {
-                ...riderFindRideState,
-                selectedDays: {
-                  ...riderFindRideState.selectedDays,
-                  tomorrow: !riderFindRideState.selectedDays.tomorrow,
-                },
-              }
-            );
-          }} />
+            <CheckBox
+              title="Tomorrow"
+              checked={riderFindRideState.selectedDays.tomorrow}
+              containerStyle={{ backgroundColor: "#F2F2F2" }}
+              textStyle={{ fontWeight: "normal" }}
+              onPress={() => {
+                setRiderFindRideState(
+                  {
+                    ...riderFindRideState,
+                    selectedDays: {
+                      ...riderFindRideState.selectedDays,
+                      tomorrow: !riderFindRideState.selectedDays.tomorrow,
+                    },
+                  }
+                );
+              }} />
 
-      </View>
+          </View>
 
-      <View style={findRideStyles.vehiclePreferenceConatiner}>
-        <Text
-          style={findRideStyles.findRideRouteSelectionContainerText}
-        >{"Vehicle preference:"}</Text>
+          <View style={findRideStyles.vehiclePreferenceConatiner}>
+            <Text
+              style={findRideStyles.findRideRouteSelectionContainerText}
+            >Vehicle preference:</Text>
 
-        <ButtonGroup
-          onPress={(selectedindex) => {
-            setRiderFindRideState({
-              ...riderFindRideState,
-              vehiclePreferenceIndex: selectedindex,
-            });
-          }}
-          selectedIndex={riderFindRideState.vehiclePreferenceIndex}
-          buttons={vehiclePreferenceButtonsGroup}
-        />
-      </View>
+            <ButtonGroup
+              onPress={(selectedindex) => {
+                setRiderFindRideState({
+                  ...riderFindRideState,
+                  vehiclePreferenceIndex: selectedindex,
+                });
+              }}
+              selectedIndex={riderFindRideState.vehiclePreferenceIndex}
+              buttons={Config.PREFERRED_VEHICLE}
+            />
+          </View>
 
-      <Divider style={{ marginLeft: 50, marginRight: 50, }} />
+          <Divider style={{ marginLeft: 50, marginRight: 50, }} />
 
-      <View style={findRideStyles.findRideButton}>
-        <Button
-          onPress={() => {
-            setRiderFindRideState({
-              ...riderFindRideState,
-            });
-          }}
-          disabled={!(riderFindRideState.selectedDays.today ||
-            riderFindRideState.selectedDays.tomorrow)}
-          title={"Find Rides"} />
-      </View>
+          <View style={findRideStyles.findRideButton}>
+            <Button
+              onPress={() => {
+                setRiderFindRideState({
+                  ...riderFindRideState,
+                });
+              }}
+              disabled={!(riderFindRideState.selectedDays.today ||
+                riderFindRideState.selectedDays.tomorrow)}
+              title={"Find Rides"} />
+          </View>
 
-    </View >
+        </View >
+      }
+    </>
   );
 }
 
 const findRideStyles = StyleSheet.create({
   vehiclePreferenceConatiner: {
     marginBottom: 40,
+    marginTop: 10,
   },
   findRideMainView: {
     flexDirection: "column",
   },
   findRideButton: {
     alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
   },
   findRideRouteSelectionContainer: {
-    marginTop: 20,
+    marginTop: 10,
   },
   findRideRouteSelectionContainerText: {
     fontWeight: "bold",
-    marginLeft: 10,
   },
   homeDestinationText: {
     marginTop: 2,
@@ -140,12 +145,11 @@ const findRideStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
   },
   findRidesSelectedDaysText: {
     fontWeight: "bold",
-    left: -10,
+    left: -15,
     paddingBottom: 5,
   }
 });
