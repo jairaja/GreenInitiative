@@ -12,11 +12,14 @@ const ROUTE_INFO = ["Rohtak to Gurgaon", "Gurgaon to Rohtak"];
 
 const PREFERRED_VEHICLE = ["Car", "Bike", "Any"];
 
+const TOD_TOM = ["Today", "Tomorrow"];
+
 export default {
   SERVER_URL,
   GOOGLE_API_KEY,
   APP_NAME,
   ROUTE_INFO,
   PREFERRED_VEHICLE,
+  TOD_TOM,
 };
 
