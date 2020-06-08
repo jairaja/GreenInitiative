@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ProgressViewIOSBase } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import config from './../common/config';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import GiTimeDisplay from '../common/controls/gi-time-display';
 
 interface PostRideAvailablePorp {
   visible: boolean;
@@ -15,6 +14,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
     selectedRouteIndex: 0,
     startingPointText: "",
     pickupPoints: "",
+    startingTime: "",
   });
 
   return (
@@ -25,7 +25,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
             <Text
-              style={postRideAvailableStyle.rideAvailableText}
+              style={postRideAvailableStyle.postRideAvailableLabel}
             >Ride available from:</Text>
 
             <ButtonGroup
@@ -41,7 +41,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
           </View>
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
-            <Text style={postRideAvailableStyle.rideAvailableText}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
               Starting Point:
             </Text>
 
@@ -54,11 +54,11 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
                 })
               }}
               placeholder={"Landmarks seprated by commas (required)"}
-              style={postRideAvailableStyle.startingPointText} />
+              style={postRideAvailableStyle.postRideAvailableText} />
           </View>
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
-            <Text style={postRideAvailableStyle.rideAvailableText}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
               Pickup Points:
             </Text>
 
@@ -74,6 +74,20 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
               numberOfLines={2}
               placeholder={"Landmarks seprated by commas (optional)"}
               style={postRideAvailableStyle.pickupPointsText} />
+          </View>
+
+          <View style={postRideAvailableStyle.postRideAvailableTimePickerContainer}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
+              Starting Time:
+            </Text>
+
+            <GiTimeDisplay
+              updateTime={(selectedStartingTime: string) => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                  startingTime: selectedStartingTime,
+                });
+              }} />
           </View>
 
         </View>
@@ -94,11 +108,15 @@ const postRideAvailableStyle = StyleSheet.create({
   postRideAvailableMembersContainer: {
     marginTop: 20,
   },
-  startingPointText: {
+  postRideAvailableTimePickerContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+  },
+  postRideAvailableText: {
     borderColor: "#000000",
     borderBottomWidth: 1,
   },
-  rideAvailableText: {
+  postRideAvailableLabel: {
     fontWeight: "bold",
   },
 });
