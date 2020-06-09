@@ -67,9 +67,12 @@ const RiderStyle = StyleSheet.create({
   },
   readPostView: {
     margin: 10,
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
     borderWidth: 0.5,
     flex: 1,
+    alignSelf: 'stretch',
     borderColor: "#bdbdbd",
   }
 });
