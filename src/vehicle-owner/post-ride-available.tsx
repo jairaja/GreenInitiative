@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ProgressViewIOSBase } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import config from './../common/config';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import GiTimeDisplay from '../common/controls/gi-time-display';
 
 interface PostRideAvailablePorp {
   visible: boolean;
@@ -13,8 +12,11 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
 
   const [postFindRiderState, setPostFindRiderState] = useState({
     selectedRouteIndex: 0,
+    selectedDayIndex: 0,
     startingPointText: "",
     pickupPoints: "",
+    dropPoints: "",
+    startingTime: "",
   });
 
   return (
@@ -25,7 +27,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
             <Text
-              style={postRideAvailableStyle.rideAvailableText}
+              style={postRideAvailableStyle.postRideAvailableLabel}
             >Ride available from:</Text>
 
             <ButtonGroup
@@ -41,7 +43,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
           </View>
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
-            <Text style={postRideAvailableStyle.rideAvailableText}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
               Starting Point:
             </Text>
 
@@ -53,12 +55,12 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
                   startingPointText: newValue,
                 })
               }}
-              placeholder={"Landmarks seprated by commas (required)"}
-              style={postRideAvailableStyle.startingPointText} />
+              placeholder={"Pls try to be specific (required)"}
+              style={postRideAvailableStyle.postRideAvailableText} />
           </View>
 
           <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
-            <Text style={postRideAvailableStyle.rideAvailableText}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
               Pickup Points:
             </Text>
 
@@ -74,6 +76,56 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
               numberOfLines={2}
               placeholder={"Landmarks seprated by commas (optional)"}
               style={postRideAvailableStyle.pickupPointsText} />
+          </View>
+
+          <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
+              Drop Points:
+            </Text>
+
+            <TextInput
+              multiline
+              value={postFindRiderState.dropPoints}
+              onChangeText={(newValue) => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                  dropPoints: newValue,
+                })
+              }}
+              numberOfLines={2}
+              placeholder={"Landmarks seprated by commas (optional)"}
+              style={postRideAvailableStyle.pickupPointsText} />
+          </View>
+
+          <View style={postRideAvailableStyle.postRideAvailableTimePickerContainer}>
+            <Text style={postRideAvailableStyle.postRideAvailableLabel}>
+              Starting Time:
+            </Text>
+
+            <GiTimeDisplay
+              updateTime={(selectedStartingTime: string) => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                  startingTime: selectedStartingTime,
+                });
+              }} />
+          </View>
+
+          <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
+            <Text
+              style={postRideAvailableStyle.postRideAvailableLabel}
+            >When:</Text>
+
+            <ButtonGroup
+              onPress={(selectedIndex) => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                  selectedDayIndex: selectedIndex
+                });
+              }}
+              selectedIndex={postFindRiderState.selectedDayIndex}
+              buttons={config.TOD_TOM}
+            />
           </View>
 
         </View>
@@ -92,13 +144,17 @@ const postRideAvailableStyle = StyleSheet.create({
     flexDirection: "column",
   },
   postRideAvailableMembersContainer: {
-    marginTop: 20,
+    marginTop: 15,
   },
-  startingPointText: {
+  postRideAvailableTimePickerContainer: {
+    marginTop: 15,
+    flexDirection: "row",
+  },
+  postRideAvailableText: {
     borderColor: "#000000",
     borderBottomWidth: 1,
   },
-  rideAvailableText: {
+  postRideAvailableLabel: {
     fontWeight: "bold",
   },
 });

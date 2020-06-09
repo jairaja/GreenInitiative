@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { ButtonGroup, Divider } from 'react-native-elements';
 import config from '../common/config';
 import { TextInput } from 'react-native';
+import GiTimeDisplay from '../common/controls/gi-time-display';
 
 interface PostNewRequestProp {
   visible: boolean;
@@ -19,6 +20,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
     preferredVehicleIndex: 0,
     selectedDayIndex: 0,
     preferredBoardingPoints: "",
+    preferredStartingTime: "",
   });
 
   return (
@@ -59,8 +61,22 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 })
               }}
               numberOfLines={2}
-              placeholder={"Landmarks seprated by commas PREFERRED TIME SlOT"}
+              placeholder={"Landmarks seprated by commas (optional)"}
               style={postNewRequirementStyles.preferredBoardingingPointsText} />
+          </View>
+
+          <View style={postNewRequirementStyles.postNewRequirementTimePickerContainer}>
+            <Text style={postNewRequirementStyles.findRideRouteLabels}>
+              Preferred Time:
+            </Text>
+
+            <GiTimeDisplay
+              updateTime={(selectedStartingTime: string) => {
+                setRiderNewRequestState({
+                  ...riderNewRequestState,
+                  preferredStartingTime: selectedStartingTime,
+                });
+              }} />
           </View>
 
           <View style={postNewRequirementStyles.postNewRequestRouteSelectionContainer}>
@@ -125,7 +141,7 @@ const postNewRequirementStyles = StyleSheet.create({
     flex: 1,
   },
   postNewRequestRouteSelectionContainer: {
-    marginTop: 20,
+    marginTop: 15,
   },
   preferredBoardingingPointsText: {
     height: 40,
@@ -134,5 +150,9 @@ const postNewRequirementStyles = StyleSheet.create({
   },
   findRideRouteLabels: {
     fontWeight: "bold",
+  },
+  postNewRequirementTimePickerContainer: {
+    marginTop: 15,
+    flexDirection: "row",
   },
 });

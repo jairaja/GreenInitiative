@@ -122,18 +122,18 @@ export default function FindRide(prop: FindRideProp) {
 
 const findRideStyles = StyleSheet.create({
   vehiclePreferenceConatiner: {
-    marginBottom: 40,
-    marginTop: 10,
+    marginBottom: 30,
+    marginTop: 15,
   },
   findRideMainView: {
     flexDirection: "column",
   },
   findRideButton: {
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 15,
   },
   findRideRouteSelectionContainer: {
-    marginTop: 10,
+    marginTop: 15,
   },
   findRideRouteSelectionContainerText: {
     fontWeight: "bold",
@@ -145,11 +145,11 @@ const findRideStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 15,
   },
   findRidesSelectedDaysText: {
     fontWeight: "bold",
-    left: -15,
+    // left: -15,
     paddingBottom: 5,
   }
 });

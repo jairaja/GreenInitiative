@@ -19,7 +19,7 @@ export default function VehicleOwner() {
             setReadPosts(false);
           }}>
           <Text style={{ marginTop: 3, }}>
-            Find Rider
+            Post Ride Availability
           </Text>
         </TouchableOpacity>
 
@@ -42,7 +42,7 @@ export default function VehicleOwner() {
           }}
         >
           <Text style={{ marginTop: 3, }}>
-            Post Ride Availability
+            Find Rider
           </Text>
         </TouchableOpacity>
 
@@ -68,7 +68,9 @@ const vehicleOwnerStyles = StyleSheet.create({
   },
   readPostView: {
     margin: 10,
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
     borderWidth: 0.5,
     flex: 1,
     alignSelf: 'stretch',
