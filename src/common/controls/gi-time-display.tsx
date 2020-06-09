@@ -8,8 +8,12 @@ interface GiTimeDisplayProps {
 
 function GiTimeDisplay(prop: GiTimeDisplayProps) {
 
+  const getTimeComponentValue = (value: number): string => {
+    return (value / 10) > 1 ? value.toString() : '0' + value;
+  }
+
   const getTime = (time: Date): string => {
-    return `${time.getHours()} : ${time.getMinutes()}`;
+    return `${getTimeComponentValue(time.getHours())} : ${getTimeComponentValue(time.getMinutes())}`;
   }
 
   const [giTimePickerState, setGiTimePickerState] = useState({

@@ -96,11 +96,11 @@ export default function FindRide(prop: FindRideProp) {
                 });
               }}
               selectedIndex={riderFindRideState.vehiclePreferenceIndex}
-              buttons={Config.PREFERRED_VEHICLE}
+              buttons={Config.VEHICLE_TYPE}
             />
           </View>
 
-          <Divider style={{ marginLeft: 50, marginRight: 50, }} />
+          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 30 }} />
 
           <View style={findRideStyles.findRideButton}>
             <Button
@@ -122,7 +122,6 @@ export default function FindRide(prop: FindRideProp) {
 
 const findRideStyles = StyleSheet.create({
   vehiclePreferenceConatiner: {
-    marginBottom: 30,
     marginTop: 15,
   },
   findRideMainView: {

@@ -12,7 +12,7 @@ interface PostNewRequestProp {
 export default function PostNewRequest(prop: PostNewRequestProp) {
 
   const routeButtonsGroup = config.ROUTE_INFO;
-  const vehiclePreferenceButtonsGroup = config.PREFERRED_VEHICLE;
+  const vehiclePreferenceButtonsGroup = config.VEHICLE_TYPE;
   const whenButtonGroup = config.TOD_TOM;
 
   const [riderNewRequestState, setRiderNewRequestState] = useState({
@@ -113,17 +113,16 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
             />
           </View>
 
-          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 40 }} />
+          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 30 }} />
 
           <View style={postNewRequirementStyles.postNewRequestButton}>
             <Button
               onPress={() => {
-                console.log(JSON.stringify(riderNewRequestState));
                 setRiderNewRequestState({
                   ...riderNewRequestState,
                 });
               }}
-              title={"Post New Request"} />
+              title={"Post Request"} />
           </View>
 
         </View>

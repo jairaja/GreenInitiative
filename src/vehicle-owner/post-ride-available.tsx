@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
-import { ButtonGroup } from 'react-native-elements';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { ButtonGroup, Divider } from 'react-native-elements';
 import config from './../common/config';
 import GiTimeDisplay from '../common/controls/gi-time-display';
 
@@ -13,6 +13,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
   const [postFindRiderState, setPostFindRiderState] = useState({
     selectedRouteIndex: 0,
     selectedDayIndex: 0,
+    vehicleTypeIndex: 0,
     startingPointText: "",
     pickupPoints: "",
     dropPoints: "",
@@ -128,6 +129,35 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
             />
           </View>
 
+          <View style={postRideAvailableStyle.postRideAvailableMembersContainer}>
+            <Text
+              style={postRideAvailableStyle.postRideAvailableLabel}
+            >Vehicle type:</Text>
+
+            <ButtonGroup
+              onPress={(selectedindex) => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                  vehicleTypeIndex: selectedindex,
+                });
+              }}
+              selectedIndex={postFindRiderState.vehicleTypeIndex}
+              buttons={config.VEHICLE_TYPE}
+            />
+          </View>
+
+          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 30 }} />
+
+          <View style={postRideAvailableStyle.postNewAvailabilityButton}>
+            <Button
+              onPress={() => {
+                setPostFindRiderState({
+                  ...postFindRiderState,
+                });
+              }}
+              title={"Post Availability"} />
+          </View>
+
         </View>
       }
     </>
@@ -145,6 +175,10 @@ const postRideAvailableStyle = StyleSheet.create({
   },
   postRideAvailableMembersContainer: {
     marginTop: 15,
+  },
+  postNewAvailabilityButton: {
+    alignSelf: "center",
+    marginTop: 10,
   },
   postRideAvailableTimePickerContainer: {
     marginTop: 15,

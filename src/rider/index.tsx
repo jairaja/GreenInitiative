@@ -70,7 +70,7 @@ const RiderStyle = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
-    borderWidth: 0.5,
+    borderWidth: 1,
     flex: 1,
     alignSelf: 'stretch',
     borderColor: "#bdbdbd",
