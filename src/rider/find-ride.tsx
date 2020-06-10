@@ -96,7 +96,7 @@ export default function FindRide(prop: FindRideProp) {
                 });
               }}
               selectedIndex={riderFindRideState.vehiclePreferenceIndex}
-              buttons={Config.VEHICLE_TYPE}
+              buttons={Config.VEHICLE_TYPE_FOR_RIDER}
             />
           </View>
 

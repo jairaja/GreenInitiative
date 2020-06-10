@@ -11,14 +11,11 @@ interface PostNewRequestProp {
 
 export default function PostNewRequest(prop: PostNewRequestProp) {
 
-  const routeButtonsGroup = config.ROUTE_INFO;
-  const vehiclePreferenceButtonsGroup = config.VEHICLE_TYPE;
-  const whenButtonGroup = config.TOD_TOM;
-
   const [riderNewRequestState, setRiderNewRequestState] = useState({
     selectedRouteIndex: 0,
     preferredVehicleIndex: 0,
     selectedDayIndex: 0,
+    preferredCommMode: 0,
     preferredBoardingPoints: "",
     preferredStartingTime: "",
   });
@@ -42,7 +39,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.selectedRouteIndex}
-              buttons={routeButtonsGroup}
+              buttons={config.ROUTE_INFO}
             />
           </View>
 
@@ -92,7 +89,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.selectedDayIndex}
-              buttons={whenButtonGroup}
+              buttons={config.TOD_TOM}
             />
           </View>
 
@@ -109,7 +106,24 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.preferredVehicleIndex}
-              buttons={vehiclePreferenceButtonsGroup}
+              buttons={config.VEHICLE_TYPE_FOR_RIDER}
+            />
+          </View>
+
+          <View style={postNewRequirementStyles.postNewRequestRouteSelectionContainer}>
+            <Text
+              style={postNewRequirementStyles.findRideRouteLabels}
+            >Preferred Comm Mode:</Text>
+
+            <ButtonGroup
+              onPress={(selectedIndex) => {
+                setRiderNewRequestState({
+                  ...riderNewRequestState,
+                  preferredCommMode: selectedIndex
+                });
+              }}
+              selectedIndex={riderNewRequestState.preferredCommMode}
+              buttons={config.COMMUNICATION_MODE}
             />
           </View>
 

@@ -10,7 +10,13 @@ const APP_NAME = 'REC';
 
 const ROUTE_INFO = ["Rohtak to Gurgaon", "Gurgaon to Rohtak"];
 
-const VEHICLE_TYPE = ["Car", "Bike", "Any"];
+const VEHICLE_TYPE_FOR_RIDER = ["Car", "Bike", "Any"];
+
+const VEHICLE_TYPE_FOR_VEHICLE_OWNER = ["Car", "Bike"];
+
+const COMMUNICATION_MODE = ["WhatsApp", "Call", "Any"];
+
+const FUEL_TYPE = ["Petrol", "Diesel", "CNG"];
 
 const TOD_TOM = ["Today", "Tomorrow"];
 
@@ -19,7 +25,10 @@ export default {
   GOOGLE_API_KEY,
   APP_NAME,
   ROUTE_INFO,
-  VEHICLE_TYPE,
+  VEHICLE_TYPE_FOR_RIDER,
   TOD_TOM,
+  FUEL_TYPE,
+  COMMUNICATION_MODE,
+  VEHICLE_TYPE_FOR_VEHICLE_OWNER,
 };
 

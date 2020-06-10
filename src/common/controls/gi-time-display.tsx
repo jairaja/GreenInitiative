@@ -70,7 +70,7 @@ const GiTimeDisplayStyle = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 20,
     width: 150,
-    borderColor: "#000000",
+    borderColor: "#bdbdbd",
     borderWidth: 0.5,
     padding: 5,
   },
