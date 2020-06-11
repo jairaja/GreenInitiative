@@ -3,7 +3,8 @@ import { Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 interface GiTimeDisplayProps {
-  updateTime(selectedStartingTime: string): void;
+  updateTime(selectedTimeDisplay: string, selectedTime: Date): void;
+  selectedTime: Date;
 }
 
 function GiTimeDisplay(prop: GiTimeDisplayProps) {
@@ -18,7 +19,7 @@ function GiTimeDisplay(prop: GiTimeDisplayProps) {
 
   const [giTimePickerState, setGiTimePickerState] = useState({
     showTimePicker: false,
-    selectedTime: new Date(),
+    selectedTime: prop.selectedTime,
   });
 
   return (
@@ -54,7 +55,7 @@ function GiTimeDisplay(prop: GiTimeDisplayProps) {
               showTimePicker: (Platform.OS === 'ios'),
               selectedTime: currentSelectedTime,
             });
-            prop.updateTime(getTime(currentSelectedTime));
+            prop.updateTime(getTime(currentSelectedTime), currentSelectedTime);
           }}
         />
       }

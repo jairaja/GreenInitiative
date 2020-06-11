@@ -25,6 +25,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
     additionalComments: "",
     dropPoints: "",
     startingTime: "",
+    selectedStartingTime: new Date(),
   });
 
   return (
@@ -111,10 +112,12 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
             </Text>
 
             <GiTimeDisplay
-              updateTime={(selectedStartingTime: string) => {
+              selectedTime={postRideAvailableState.selectedStartingTime}
+              updateTime={(selectedTimeDisplay: string, selectedTime: Date) => {
                 setPostRideAvailableState({
                   ...postRideAvailableState,
-                  startingTime: selectedStartingTime,
+                  startingTime: selectedTimeDisplay,
+                  selectedStartingTime: selectedTime,
                 });
               }} />
           </View>
@@ -218,6 +221,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
               minimumValue={100}
               maximumValue={150}
               step={10}
+              initialValue={postRideAvailableState.sharePerSeat}
               onValueChange={newValue => {
                 setPostRideAvailableState({
                   ...postRideAvailableState,

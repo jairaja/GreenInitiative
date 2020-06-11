@@ -6,13 +6,13 @@ interface GiSliderInterface {
   minimumValue: number;
   maximumValue: number;
   step: number;
-  initialValue?: number;
+  initialValue: number;
   onValueChange(newValue: number): void;
 }
 
 function GiSlider(props: GiSliderInterface) {
 
-  const [sliderValue, setSliderValue] = useState(props.initialValue ? props.initialValue : props.minimumValue);
+  const [sliderValue, setSliderValue] = useState(props.initialValue);
 
   return (
     <View style={GiSliderStyle.giSliderContainer}>

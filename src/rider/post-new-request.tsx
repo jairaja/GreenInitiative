@@ -18,6 +18,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
     preferredCommMode: 0,
     preferredBoardingPoints: "",
     preferredStartingTime: "",
+    selectedStartingTime: new Date(),
   });
 
   return (
@@ -68,10 +69,12 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
             </Text>
 
             <GiTimeDisplay
-              updateTime={(selectedStartingTime: string) => {
+              selectedTime={riderNewRequestState.selectedStartingTime}
+              updateTime={(selectedTimeDisplay: string, selectedTime: Date) => {
                 setRiderNewRequestState({
                   ...riderNewRequestState,
-                  preferredStartingTime: selectedStartingTime,
+                  preferredStartingTime: selectedTimeDisplay,
+                  selectedStartingTime: selectedTime,
                 });
               }} />
           </View>
