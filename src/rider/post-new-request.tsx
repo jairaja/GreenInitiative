@@ -65,7 +65,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
 
           <View style={postNewRequirementStyles.postNewRequirementTimePickerContainer}>
             <Text style={postNewRequirementStyles.findRideRouteLabels}>
-              Preferred Time:
+              Any Time After:
             </Text>
 
             <GiTimeDisplay

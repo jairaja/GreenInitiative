@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
-import { ButtonGroup, Divider, CheckBox, Slider } from 'react-native-elements';
+import { ButtonGroup, Divider, CheckBox } from 'react-native-elements';
 import config from './../common/config';
 import GiTimeDisplay from '../common/controls/gi-time-display';
 import GiSlider from '../common/controls/gi-slider';
@@ -19,7 +19,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
     preferredCommModeIndex: 0,
     cngRefillStop: false,
     cashOnlyPayment: false,
-    startingPointText: "",
+    startingPoint: "",
     sharePerSeat: 100,
     pickupPoints: "",
     additionalComments: "",
@@ -57,11 +57,11 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
             </Text>
 
             <TextInput
-              value={postRideAvailableState.startingPointText}
+              value={postRideAvailableState.startingPoint}
               onChangeText={(newValue) => {
                 setPostRideAvailableState({
                   ...postRideAvailableState,
-                  startingPointText: newValue,
+                  startingPoint: newValue,
                 })
               }}
               placeholder={"Pls try to be specific (required)"}
@@ -83,7 +83,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
                 })
               }}
               numberOfLines={2}
-              placeholder={"Landmarks seprated by commas (optional)"}
+              placeholder={"Landmarks seprated by commas (required)"}
               style={postRideAvailableStyle.pickupPointsText} />
           </View>
 
@@ -102,7 +102,7 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
                 })
               }}
               numberOfLines={2}
-              placeholder={"Landmarks seprated by commas (optional)"}
+              placeholder={"Landmarks seprated by commas (required)"}
               style={postRideAvailableStyle.pickupPointsText} />
           </View>
 
@@ -265,6 +265,22 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
               style={postRideAvailableStyle.pickupPointsText} />
           </View>
 
+          <View style={postRideAvailableStyle.postRideAvailabilityCngCarOptions}>
+            <CheckBox
+              title="Save template for future use."
+              checked={postRideAvailableState.cngRefillStop}
+              containerStyle={{ backgroundColor: "#F2F2F2" }}
+              textStyle={{ fontWeight: "normal" }}
+              onPress={() => {
+                setPostRideAvailableState(
+                  {
+                    ...postRideAvailableState,
+                    // Show in Modal. need to show load from templates in the starting.
+                  }
+                );
+              }} />
+          </View>
+
           <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 30 }} />
 
           <View style={postRideAvailableStyle.postNewAvailabilityButton}>
@@ -274,6 +290,9 @@ export default function PostRideAvailable(prop: PostRideAvailablePorp) {
                   ...postRideAvailableState,
                 });
               }}
+              disabled={!(postRideAvailableState.startingPoint &&
+                postRideAvailableState.pickupPoints &&
+                postRideAvailableState.dropPoints)}
               title={"Post Availability"} />
           </View>
 
