@@ -11,16 +11,14 @@ interface PostNewRequestProp {
 
 export default function PostNewRequest(prop: PostNewRequestProp) {
 
-  const routeButtonsGroup = config.ROUTE_INFO;
-  const vehiclePreferenceButtonsGroup = config.PREFERRED_VEHICLE;
-  const whenButtonGroup = config.TOD_TOM;
-
   const [riderNewRequestState, setRiderNewRequestState] = useState({
     selectedRouteIndex: 0,
     preferredVehicleIndex: 0,
     selectedDayIndex: 0,
+    preferredCommMode: 0,
     preferredBoardingPoints: "",
     preferredStartingTime: "",
+    selectedStartingTime: new Date(),
   });
 
   return (
@@ -42,7 +40,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.selectedRouteIndex}
-              buttons={routeButtonsGroup}
+              buttons={config.ROUTE_INFO}
             />
           </View>
 
@@ -67,14 +65,16 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
 
           <View style={postNewRequirementStyles.postNewRequirementTimePickerContainer}>
             <Text style={postNewRequirementStyles.findRideRouteLabels}>
-              Preferred Time:
+              Any Time After:
             </Text>
 
             <GiTimeDisplay
-              updateTime={(selectedStartingTime: string) => {
+              selectedTime={riderNewRequestState.selectedStartingTime}
+              updateTime={(selectedTimeDisplay: string, selectedTime: Date) => {
                 setRiderNewRequestState({
                   ...riderNewRequestState,
-                  preferredStartingTime: selectedStartingTime,
+                  preferredStartingTime: selectedTimeDisplay,
+                  selectedStartingTime: selectedTime,
                 });
               }} />
           </View>
@@ -92,7 +92,7 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.selectedDayIndex}
-              buttons={whenButtonGroup}
+              buttons={config.TOD_TOM}
             />
           </View>
 
@@ -109,21 +109,37 @@ export default function PostNewRequest(prop: PostNewRequestProp) {
                 });
               }}
               selectedIndex={riderNewRequestState.preferredVehicleIndex}
-              buttons={vehiclePreferenceButtonsGroup}
+              buttons={config.VEHICLE_TYPE_FOR_RIDER}
             />
           </View>
 
-          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 40 }} />
+          <View style={postNewRequirementStyles.postNewRequestRouteSelectionContainer}>
+            <Text
+              style={postNewRequirementStyles.findRideRouteLabels}
+            >Preferred Comm Mode:</Text>
+
+            <ButtonGroup
+              onPress={(selectedIndex) => {
+                setRiderNewRequestState({
+                  ...riderNewRequestState,
+                  preferredCommMode: selectedIndex
+                });
+              }}
+              selectedIndex={riderNewRequestState.preferredCommMode}
+              buttons={config.COMMUNICATION_MODE}
+            />
+          </View>
+
+          <Divider style={{ marginLeft: 50, marginRight: 50, marginTop: 30 }} />
 
           <View style={postNewRequirementStyles.postNewRequestButton}>
             <Button
               onPress={() => {
-                console.log(JSON.stringify(riderNewRequestState));
                 setRiderNewRequestState({
                   ...riderNewRequestState,
                 });
               }}
-              title={"Post New Request"} />
+              title={"Post Request"} />
           </View>
 
         </View>
